@@ -15,11 +15,19 @@ public class MyDeque<E>{
   }
 
   public int size(){
-
+    return data.length;
   }
 
   public String toString(){
+    String res = "";
 
+    for(int i = 0; i < data.length; i++){
+      res += data[i];
+      if (i != size() - 1){
+        res += ", ";
+      }
+    }
+    return res;
   }
 
   public void addFirst(E element){
@@ -31,20 +39,26 @@ public class MyDeque<E>{
   }
 
   public E removeFirst(){
-
+    return data[start];
   }
 
   public E removeLast(){
-
+    return data[end];
   }
 
   public E getFirst(){
-
+    return data[start];
   }
 
   public E getLast(){
-
+    return data[end];
   }
+
+  public void main(String[] args){
+    MyDeque test = new MyDeque();
+    System.out.println(MyDeque.toString());
+  }
+
 
 }
 
