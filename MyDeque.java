@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -5,7 +8,6 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public MyDeque(){
     data = (E[])new Object[10];
-    size = data.length;
   }
 
   @SuppressWarnings("unchecked")
@@ -31,11 +33,15 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
+    if(element == null) throw new NullPointerException();
 
+    data.add (0, element);
   }
 
   public void addLast(E element){
+    if(element == null) throw new NullPointerException();
 
+    data.add (data.length - 1, element);
   }
 
   public E removeFirst(){
@@ -54,10 +60,10 @@ public class MyDeque<E>{
     return data[end];
   }
 
-  public void main(String[] args){
+/*  public void main(String[] args){
     MyDeque test = new MyDeque();
     System.out.println(MyDeque.toString());
-  }
+  }*/
 
 
 }
