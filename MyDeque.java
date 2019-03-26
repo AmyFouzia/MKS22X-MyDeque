@@ -19,13 +19,14 @@ public class MyDeque<E>{
     return size;
   }
 
+  @SuppressWarnings("unchecked")
   private void resize(){
 		E[] track = data;
 
 		if (data.length == 0)
-			data = new E[(track.length + 1 )* 2];
+			data = (E[])new Object[(track.length + 1 )* 2];
 		else
-			data = new E[track.length* 2];
+			data = (E[])new Object[(track.length * 2)];
 
 		for (int i = 0; i < track.length; i++) {
 			data[i] = track[i];
@@ -64,7 +65,7 @@ public class MyDeque<E>{
 
 		E track = data[0];
 		for (int i = 0; i < data.length-1; i++) {
-			data[i] = data[i+1];
+			data[i] = data[i+1]; //remove!!!
 		}
 		size--;
 
@@ -93,7 +94,7 @@ public class MyDeque<E>{
         deque.addLast(i);
       }
 
-      //deque.removeFirst();
+      deque.removeFirst();
       System.out.println(deque.toString());
   }
 
