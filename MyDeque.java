@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 public class MyDeque<E>{
   private E[] data;
@@ -17,7 +16,20 @@ public class MyDeque<E>{
   }
 
   public int size(){
-    return data.length;
+    return size;
+  }
+
+  private void resize(){
+		E[] track = data;
+
+		if (data.length == 0)
+			data = new E[(track.length + 1 )* 2];
+		else
+			data = new E[track.length* 2];
+
+		for (int i = 0; i < track.length; i++) {
+			data[i] = track[i];
+		}
   }
 
   public String toString(){
@@ -35,17 +47,28 @@ public class MyDeque<E>{
   public void addFirst(E element){
     if(element == null) throw new NullPointerException();
 
-    data.add (0, element);
   }
 
   public void addLast(E element){
     if(element == null) throw new NullPointerException();
 
-    data.add (data.length - 1, element);
+    if (data.length == size())
+			resize();
+			data[size()] = element;
+			size ++;
+
   }
 
   public E removeFirst(){
-    return data[start];
+    if(data[0] == null) throw new NullPointerException();
+
+		E track = data[0];
+		for (int i = 0; i < data.length-1; i++) {
+			data[i] = data[i+1];
+		}
+		size--;
+
+    return track;
   }
 
   public E removeLast(){
@@ -64,7 +87,15 @@ public class MyDeque<E>{
     MyDeque test = new MyDeque();
     System.out.println(MyDeque.toString());
   }*/
+  public static void main(String[] args){
+    MyDeque deque = new MyDeque<>();
+      for(int i = 0; i < 10; i++){
+        deque.addLast(i);
+      }
 
+      //deque.removeFirst();
+      System.out.println(deque.toString());
+  }
 
 }
 
