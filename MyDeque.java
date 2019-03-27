@@ -61,14 +61,21 @@ public class MyDeque<E>{
   }
 
   public E removeFirst(){
-    if(data[0] == null) throw new NullPointerException();
+    if(size() == 0) throw new NoSuchElementException();
 
-		E track = data[0];
-		for (int i = 0; i < data.length-1; i++) {
-			data[i] = data[i+1]; //remove!!!
-		}
+		E track = data[start];
+    data[start] = null;
+
+    if(size() != 1){
+      if(start == data.length - 1){
+        start = 0;
+      }
+      else{
+        start++;
+      }
+    }
+
 		size--;
-
     return track;
   }
 
@@ -94,7 +101,7 @@ public class MyDeque<E>{
         deque.addLast(i);
       }
 
-      deque.removeFirst();
+      System.out.println(deque.removeFirst());
       System.out.println(deque.toString());
   }
 
