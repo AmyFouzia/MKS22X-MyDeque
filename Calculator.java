@@ -4,7 +4,7 @@ public class Calculator{
      */
     public static double eval(String s){
       //push vals onto a stack to access two top values at a time
-      
+      return 2.0;
     }
 }
 

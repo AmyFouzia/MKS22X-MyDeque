@@ -12,7 +12,6 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
-    size = initialCapacity;
   }
 
   public int size(){
@@ -21,29 +20,41 @@ public class MyDeque<E>{
 
   @SuppressWarnings("unchecked")
   private void resize(){
-		E[] track = data;
-
-		if (data.length == 0)
-			data = (E[])new Object[(track.length + 1 )* 2];
-		else
-			data = (E[])new Object[(track.length * 2)];
+		E[] track = (E[])new Object[size() * 2 + 1];
 
 		for (int i = 0; i < track.length; i++) {
-			data[i] = track[i];
+			track[i] = data[(start + i) % data.length];
 		}
+
+    start = 0;
+    end = size - 1;
+    data = track;
   }
 
   public String toString(){
-    String res = "";
+    String res = "{";
 
-    for(int i = 0; i < data.length; i++){
-      res += data[i];
+    if(size == 0){
+      return "{}";
+    }
 
-      if (i != size() - 1){
-        res += ", ";
+    if(start < end){
+      for(int i = start; i < end; i++){
+        res += data[i] + " ";
       }
     }
 
+    //if ary loops around
+    else if(end < start){
+      for(int i = start; i < data.length; i++){
+        res += data[i] + " ";
+      }
+      for(int j = 0; j <= end; j++){
+        res += data[j] + " ";
+      }
+    }
+
+    res += "}";
     return res;
   }
 
