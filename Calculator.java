@@ -4,7 +4,53 @@ public class Calculator{
      */
     public static double eval(String s){
       //push vals onto a stack to access two top values at a time
-      return 2.0;
+
+      String[] data = s.split(" "); //less lines than using a scanner oOf
+      MyDeque<Double> stack = new MyDeque<>();
+
+      for(int i = 0; i < data.length; i++){
+
+        //adding
+        if(data[i].equals("+")){
+          Double last = stack.removeLast();
+          Double last2 = stack.removeLast();
+          stack.addLast(last + last2);
+        }
+
+        //subtracting
+        else if(data[i].equals("-")){
+          Double last = stack.removeLast();
+          Double last2 = stack.removeLast();
+          stack.addLast(last2 - last);
+        }
+
+        //multiplication
+        else if(data[i].equals("*")){
+          Double last = stack.removeLast();
+          Double last2 = stack.removeLast();
+          stack.addLast(last * last2);
+        }
+
+        //division
+        else if(data[i].equals("/")){
+          Double last = stack.removeLast();
+          Double last2 = stack.removeLast();
+          stack.addLast(last2 / last);
+        }
+
+        //mod
+        else if(data[i].equals("%")){
+          Double last = stack.removeLast();
+          Double last2 = stack.removeLast();
+          stack.addLast(last2 % last);
+        }
+
+        else{
+          stack.addLast(Double.valueOf(data[i]));
+        }
+
+      }
+      return stack.getFirst();
     }
 }
 

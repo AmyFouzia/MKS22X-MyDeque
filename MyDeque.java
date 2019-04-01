@@ -121,7 +121,6 @@ public class MyDeque<E>{
         end = data.length - 1;
       }
       else {end--;}
-      }
     }
 
     size--;
